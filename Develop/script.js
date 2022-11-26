@@ -29,9 +29,7 @@ currentDay.textContent = `${unixFormt} ${day}`;
 
 // gets current hour to set color onto hour elements
 let currentHour = Number(dayjs.unix(unix).format("H"));
-console.log(currentHour);
-
-// let currentMeridiem = dayjs.unix(unix).format("a");
+// console.log(currentHour);
 
 let hour9El = document.querySelector("#hour-9");
 let hour10El = document.querySelector("#hour-10");
@@ -86,15 +84,34 @@ let hourEl = [
 for (let i = 0; i < hourEl.length; i++) {
   if (hourEl[i].hour === currentHour) {
     hourEl[i].element.setAttribute("class", "row time-block present");
-    console.log(`${hourEl[i].hour} ${hourEl[i].meridiem}`);
+    // console.log(`${hourEl[i].hour} ${hourEl[i].meridiem}`);
   } else if (hourEl[i].hour > currentHour) {
     hourEl[i].element.setAttribute("class", "row time-block future");
-    console.log(`${hourEl[i].hour} ${hourEl[i].meridiem}`);
+    // console.log(`${hourEl[i].hour} ${hourEl[i].meridiem}`);
   } else if (hourEl[i].hour < currentHour) {
     hourEl[i].element.setAttribute("class", "row time-block past");
-    console.log(`${hourEl[i].hour} ${hourEl[i].meridiem}`);
+    // console.log(`${hourEl[i].hour} ${hourEl[i].meridiem}`);
   }
 }
+
+let textHour5 = document.querySelector("#textHour5");
+let saveBtn5 = document.querySelector("#saveBtn5");
+saveBtn5.addEventListener("click", function () {});
+
+function init() {
+  if (localStorage.getItem("hour5") === null) {
+    localStorage.setItem("hour5", JSON.stringify());
+  } else {
+    let localStorageObj = JSON.parse(localStorage.getItem("hour5"));
+    textHour5.textContent = localStorageObj;
+  }
+}
+
+saveBtn5.addEventListener("click", function () {
+  localStorage.setItem("hour5", JSON.stringify(textHour5.value));
+});
+
+// init();
 
 $(function () {
   // TODO: Add a listener for click events on the save button. This code should
